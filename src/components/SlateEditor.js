@@ -1,6 +1,6 @@
-import React, { useEffect, useMemo, useCallback, useState } from "react";
+import React, { useMemo, useCallback, useState } from "react";
 import { createEditor } from "slate";
-import { withHistory } from "slate-history";
+// import { withHistory } from "slate-history";
 import { Slate, Editable, withReact } from "slate-react";
 
 const SlateEditor = () => {
@@ -68,10 +68,10 @@ const SlateEditor = () => {
     return <Leaf {...props} />;
   }, []);
 
-  const handleValue = (value) => {
-    console.log("handleValue", { value });
-    setValue(value);
-  };
+  //   const handleValue = (value) => {
+  //     console.log("handleValue", { value });
+  //     setValue(value);
+  //   };
 
   return (
     <div className="column">

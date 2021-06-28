@@ -61,20 +61,20 @@ function Static() {
   );
 }
 
-const InsertImageButton = () => {
-  const editor = useSlate();
-  return (
-    <Grid
-      onMouseDown={(event) => {
-        event.preventDefault();
-        const url = window.prompt("Enter the URL of the image:");
-        if (!url) return;
-        CustomEditor.insertImage(editor, url);
-      }}
-    >
-      img
-    </Grid>
-  );
-};
+// const InsertImageButton = () => {
+//   const editor = useSlate();
+//   return (
+//     <Grid
+//       onMouseDown={(event) => {
+//         event.preventDefault();
+//         const url = window.prompt("Enter the URL of the image:");
+//         if (!url) return;
+//         CustomEditor.insertImage(editor, url);
+//       }}
+//     >
+//       img
+//     </Grid>
+//   );
+// };
 
 export default React.memo(Static);
