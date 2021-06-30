@@ -33,7 +33,7 @@ const serializeEach = (node) => {
     case TYPES.P:
       return `\n${children}\n`;
     case TYPES.BLOCKQUOTE:
-      return `> ${children}`;
+      return `> ${children}\n`;
     case TYPES.UL:
       return children;
     case TYPES.OL:
