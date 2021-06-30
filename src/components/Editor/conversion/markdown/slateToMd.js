@@ -43,7 +43,7 @@ const serializeEach = (node) => {
     case TYPES.LI:
       return `- ${children}`;
     case TYPES.H1:
-      return `# ${children}`;
+      return `# ${children}\n`;
     case TYPES.H2:
       return `## ${children}\n`;
     case TYPES.H3:
