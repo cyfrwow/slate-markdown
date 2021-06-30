@@ -145,7 +145,15 @@ const MarkdownEditor = ({ onValueChange }) => {
                     n.italic ||
                     n.underline ||
                     n.strikethrough ||
-                    n.code
+                    n.code ||
+                    n.type === "heading-one" ||
+                    n.type === "heading-two" ||
+                    n.type === "heading-three" ||
+                    n.type === "heading-four" ||
+                    n.type === "heading-five" ||
+                    n.type === "heading-six" ||
+                    n.type === "block-quote" ||
+                    n.type === "link"
                   );
                 },
               });
