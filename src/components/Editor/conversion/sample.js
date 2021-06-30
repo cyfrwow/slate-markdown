@@ -104,69 +104,48 @@ export const slateObj = [
       },
     ],
   },
-
-  //   {
-  //     type: "ul-list",
-  //     children: [
-  //       {
-  //         type: "list-item",
-  //         children: [
-  //           {
-  //             type: "paragraph",
-  //             children: [
-  //               {
-  //                 text: "bullet list item 1",
-  //               },
-  //             ],
-  //           },
-  //         ],
-  //       },
-  //       {
-  //         type: "list-item",
-  //         children: [
-  //           {
-  //             type: "paragraph",
-  //             children: [
-  //               {
-  //                 text: "bullet list item 2",
-  //               },
-  //             ],
-  //           },
-  //         ],
-  //       },
-  //     ],
-  //   },
-  //   {
-  //     type: "ol-list",
-  //     children: [
-  //       {
-  //         type: "ordered-list-item",
-  //         children: [
-  //           {
-  //             type: "paragraph",
-  //             children: [
-  //               {
-  //                 text: "ordered list item 1",
-  //               },
-  //             ],
-  //           },
-  //         ],
-  //       },
-  //       {
-  //         type: "ordered-list-item",
-  //         children: [
-  //           {
-  //             type: "paragraph",
-  //             children: [
-  //               {
-  //                 text: "ordered list item 2",
-  //               },
-  //             ],
-  //           },
-  //         ],
-  //       },
-  //     ],
-  //   },
+  {
+    type: "ul-list",
+    children: [
+      {
+        type: "list-item",
+        children: [
+          {
+            text: "bullet list item 1",
+          },
+        ],
+      },
+      {
+        type: "list-item",
+        children: [
+          {
+            text: "bullet list item 2",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    type: "ol-list",
+    children: [
+      {
+        type: "ordered-list-item",
+        children: [
+          {
+            text: "ordered list item 1",
+          },
+        ],
+      },
+      {
+        type: "ordered-list-item",
+        children: [
+          {
+            text: "ordered list item 2",
+          },
+        ],
+      },
+    ],
+  },
 ];
 
 export const makeDownString = "";
