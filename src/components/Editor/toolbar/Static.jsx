@@ -23,8 +23,8 @@ const markOptions = [
   { value: `italic`, icon: "I" },
   { value: `underline`, icon: "U" },
   { value: `strikethrough`, icon: "S" },
-  { value: `code`, icon: "<>" },
-  { value: `pre`, icon: "<block>" },
+  { value: `code`, icon: "</>" },
+  { value: `pre`, icon: "<[]>" },
 ];
 
 function Static() {

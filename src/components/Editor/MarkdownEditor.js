@@ -111,6 +111,7 @@ const MarkdownEditor = ({ onValueChange }) => {
 
   return (
     <div className="column">
+      <h4>Slate editor</h4>
       <Slate
         editor={editor}
         value={value}
@@ -136,7 +137,17 @@ const MarkdownEditor = ({ onValueChange }) => {
             }
             if (event.key === "Enter" && !event.shiftKey) {
               const [match] = Editor.nodes(editor, {
-                match: (n) => n.type === "code" || n.type === "pre",
+                match: (n) => {
+                  return (
+                    n.type === "code" ||
+                    n.type === "pre" ||
+                    n.bold ||
+                    n.italic ||
+                    n.underline ||
+                    n.strikethrough ||
+                    n.code
+                  );
+                },
               });
               if (match) {
                 event.preventDefault();
