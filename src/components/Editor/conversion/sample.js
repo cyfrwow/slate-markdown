@@ -78,7 +78,7 @@ export const slateObj = [
     children: [
       {
         text: "strike through text",
-        strikeThrough: true,
+        strikethrough: true,
       },
     ],
   },
