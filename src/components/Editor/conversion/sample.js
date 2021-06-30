@@ -69,7 +69,7 @@ export const slateObj = [
     children: [
       {
         text: "bold text",
-        italic: true,
+        bold: true,
       },
     ],
   },
