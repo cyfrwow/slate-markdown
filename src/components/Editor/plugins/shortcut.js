@@ -60,14 +60,14 @@ const withShortcuts = (editor) => {
           //   }
 
           if (type === "list-item") {
-            const list = { type: "ul_list", children: [] };
+            const list = { type: "ul-list", children: [] };
             Transforms.wrapNodes(editor, list, {
               match: (n) => n.type === "list-item",
             });
           }
 
           if (type === "ordered-list-item") {
-            const list = { type: "ol_list", children: [] };
+            const list = { type: "ol-list", children: [] };
             Transforms.wrapNodes(editor, list, {
               match: (n) => n.type === "ordered-list-item",
             });

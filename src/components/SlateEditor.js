@@ -53,11 +53,11 @@ const SlateEditor = () => {
             {props.children}
           </a>
         );
-      case "ul_list":
+      case "ul-list":
         return <ul {...props.attributes}>{props.children}</ul>;
-      case "ol_list":
+      case "ol-list":
         return <ol {...props.attributes}>{props.children}</ol>;
-      case "list_item":
+      case "list-item":
         return <li {...props.attributes}>{props.children}</li>;
       default:
         return <p {...props.attributes}>{props.children}</p>;
