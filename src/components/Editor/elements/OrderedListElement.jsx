@@ -3,20 +3,18 @@ import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    borderLeft: `3px solid #ccc`,
     paddingLeft: 20,
-    margin: 0,
-    color: "#aaa",
+    listStyleType: "auto",
   },
 }));
 
-function BlockquoteElement(props) {
+function OrderedListElement(props) {
   const classes = useStyles();
   return (
-    <blockquote className={classes.root} {...props.attributes}>
+    <li className={classes.root} {...props.attributes}>
       {props.children}
-    </blockquote>
+    </li>
   );
 }
 
-export default BlockquoteElement;
+export default OrderedListElement;

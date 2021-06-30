@@ -31,6 +31,10 @@ code {
   flex: 1;
   padding: 10px 1em;
   flex-direction: column;
+  border-right: 3px solid #eee;
+}
+.column:last-child {
+  border: 0;
 }
 textarea {
   flex: 1;

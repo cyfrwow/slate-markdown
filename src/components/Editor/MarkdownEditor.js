@@ -1,14 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Prism from "prismjs";
 import isHotkey from "is-hotkey";
-import { createEditor, Text } from "slate";
+import { createEditor, Editor, Text, Transforms } from "slate";
 import { withHistory } from "slate-history";
 import { Slate, Editable, withReact } from "slate-react";
-
 import DefaultElement from "./elements/Default";
 import ImageElement from "./elements/Image";
 import BlockQuoteElement from "./elements/Blockquote";
 import ListElement from "./elements/ListItem";
+import OrderedListElement from "./elements/OrderedListElement";
 import H1Element from "./elements/H1";
 import H2Element from "./elements/H2";
 import H3Element from "./elements/H3";
@@ -16,6 +16,8 @@ import H4Element from "./elements/H4";
 import H5Element from "./elements/H5";
 import H6Element from "./elements/H6";
 import HRElement from "./elements/HR";
+import CodeElement from "./elements/Code";
+import PreElement from "./elements/Pre";
 import withImages from "./plugins/image";
 import withHtml from "./plugins/pasteHtml";
 import withShortcut from "./plugins/shortcut";
@@ -23,6 +25,7 @@ import { slateObj } from "./conversion/sample";
 import StaticToolbar from "./toolbar/Static";
 import { CustomEditor } from "./helpers";
 import TYPES from "./types";
+import LinkElement from "./elements/LinkElement";
 // import slateToMd from "./conversion/markdown/slateToMd";
 
 // console.log("********************");
@@ -39,7 +42,7 @@ const HOTKEYS = {
   "mod+e": "code",
 };
 
-const App = () => {
+const MarkdownEditor = ({ onValueChange }) => {
   const editor = React.useMemo(
     () =>
       withHtml(
@@ -102,24 +105,55 @@ const App = () => {
     return ranges;
   }, []);
 
+  useEffect(() => {
+    onValueChange(value);
+  }, [value, onValueChange]);
+
   return (
-    <Slate editor={editor} value={value} onChange={(value) => setValue(value)}>
-      <StaticToolbar />
-      <Editable
-        decorate={decorate}
-        renderElement={renderElement}
-        renderLeaf={renderLeaf}
-        onKeyDown={(event) => {
-          for (const hotkey in HOTKEYS) {
-            if (isHotkey(hotkey, event)) {
-              event.preventDefault();
-              const mark = HOTKEYS[hotkey];
-              CustomEditor.toggleMark(editor, mark);
+    <div className="column">
+      <Slate
+        editor={editor}
+        value={value}
+        onChange={(value) => setValue(value)}
+      >
+        <StaticToolbar />
+        <Editable
+          decorate={decorate}
+          renderElement={renderElement}
+          renderLeaf={renderLeaf}
+          spellCheck={true}
+          onKeyDown={(event) => {
+            for (const hotkey in HOTKEYS) {
+              if (isHotkey(hotkey, event)) {
+                event.preventDefault();
+                const mark = HOTKEYS[hotkey];
+                CustomEditor.toggleMark(editor, mark);
+              }
             }
-          }
-        }}
-      />
-    </Slate>
+            if (event.key === "Enter" && event.shiftKey) {
+              event.preventDefault();
+              Transforms.insertText(editor, "\n");
+            }
+            if (event.key === "Enter" && !event.shiftKey) {
+              const [match] = Editor.nodes(editor, {
+                match: (n) => n.type === "code" || n.type === "pre",
+              });
+              if (match) {
+                event.preventDefault();
+                Transforms.insertNodes(editor, {
+                  type: "paragraph",
+                  children: [
+                    {
+                      text: "",
+                    },
+                  ],
+                });
+              }
+            }
+          }}
+        />
+      </Slate>
+    </div>
   );
 };
 
@@ -131,6 +165,8 @@ const renderElement = (props) => {
       return <BlockQuoteElement {...props} />;
     case TYPES.LI:
       return <ListElement {...props} />;
+    case TYPES.OLI:
+      return <OrderedListElement {...props} />;
     case TYPES.H1:
       return <H1Element {...props} />;
     case TYPES.H2:
@@ -145,18 +181,29 @@ const renderElement = (props) => {
       return <H6Element {...props} />;
     case TYPES.HR:
       return <HRElement {...props} />;
+    case TYPES.CODE:
+      return <CodeElement {...props} />;
+    case TYPES.PRE:
+      return <PreElement {...props} />;
+    case TYPES.A:
+      return <LinkElement {...props} />;
     default:
       return <DefaultElement {...props} />;
   }
 };
 
 const Leaf = ({ attributes, children, leaf }) => {
+  const props = { attributes, children, leaf };
   if (leaf.bold) {
     children = <strong>{children}</strong>;
   }
 
   if (leaf.code) {
-    children = <code>{children}</code>;
+    return <CodeElement {...props} />;
+  }
+
+  if (leaf.pre) {
+    return <PreElement {...props} />;
   }
 
   if (leaf.italic) {
@@ -174,4 +221,4 @@ const Leaf = ({ attributes, children, leaf }) => {
   return <span {...attributes}>{children}</span>;
 };
 
-export default React.memo(App);
+export default React.memo(MarkdownEditor);

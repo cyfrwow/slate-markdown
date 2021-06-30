@@ -1,23 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import Editor from "@monaco-editor/react";
-import unified from "unified";
-import markdown from "remark-parse";
-import slate from "remark-slate";
 
 export default function MonacoEditor({ slateObject }) {
-  const [value, setValue] = useState("");
+  const editorRef = useRef(null);
 
   useEffect(() => {
-    unified()
-      .use(markdown)
-      .use(slate)
-      .process(slateObject, (err, value) => {
-        if (err) throw err;
-        setValue(value.result);
-      });
+    editorRef.current &&
+      editorRef.current.getAction("editor.action.formatDocument").run();
   }, [slateObject]);
 
   const editorDidMount = (editor, monaco) => {
+    editorRef.current = editor;
     setTimeout(function () {
       editor.getAction("editor.action.formatDocument").run();
     }, 200);
@@ -31,7 +24,7 @@ export default function MonacoEditor({ slateObject }) {
         options={{ wordWrap: true }}
         defaultLanguage="json"
         onMount={editorDidMount}
-        value={JSON.stringify(value)}
+        value={JSON.stringify(slateObject)}
       />
     </div>
   );

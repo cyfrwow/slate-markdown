@@ -9,10 +9,12 @@ const TYPES = {
   H6: "heading-six",
   IMG: "image",
   LI: "list-item",
-  OL: "numbered-list",
+  OLI: "ordered-list-item",
+  OL: "ol-list",
   P: "paragraph",
-  PRE: "code",
-  UL: "bulleted-list",
+  CODE: "code",
+  PRE: "pre",
+  UL: "ul-list",
   HR: "horizontal-rule",
 };
 

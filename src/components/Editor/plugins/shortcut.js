@@ -4,6 +4,11 @@ const SHORTCUTS = {
   "*": "list-item",
   "-": "list-item",
   "+": "list-item",
+  "`": "code",
+  "<>": "link",
+  "```": "pre",
+  "\\": "pre",
+  "1.": "ordered-list-item",
   ">": "block-quote",
   "---": "horizontal-rule",
   "#": "heading-one",
@@ -45,10 +50,37 @@ const withShortcuts = (editor) => {
             { match: (n) => Editor.isBlock(editor, n) }
           );
 
+          //   if (type === "link") {
+          //     console.log("sdasdas");
+          //     // const list = { type: "ul_list", children: [] };
+          //     Transforms.insertNodes(editor, {
+          //       type: "link",
+          //       children: [],
+          //     });
+          //   }
+
           if (type === "list-item") {
-            const list = { type: "bulleted-list", children: [] };
+            const list = { type: "ul_list", children: [] };
             Transforms.wrapNodes(editor, list, {
               match: (n) => n.type === "list-item",
+            });
+          }
+
+          if (type === "ordered-list-item") {
+            const list = { type: "ol_list", children: [] };
+            Transforms.wrapNodes(editor, list, {
+              match: (n) => n.type === "ordered-list-item",
+            });
+          }
+
+          if (type === "horizontal-rule") {
+            Transforms.insertNodes(editor, {
+              type: "paragraph",
+              children: [
+                {
+                  text: "",
+                },
+              ],
             });
           }
 
@@ -79,7 +111,14 @@ const withShortcuts = (editor) => {
 
           if (block.type === "list-item") {
             Transforms.unwrapNodes(editor, {
-              match: (n) => n.type === "bulleted-list",
+              match: (n) => n.type === "ul-list",
+              split: true,
+            });
+          }
+
+          if (block.type === "ordered-list-item") {
+            Transforms.unwrapNodes(editor, {
+              match: (n) => n.type === "ol-list",
               split: true,
             });
           }

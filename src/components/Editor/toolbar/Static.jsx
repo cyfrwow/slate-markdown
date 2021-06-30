@@ -1,5 +1,5 @@
 import React from "react";
-import { Grid, Typography } from "@material-ui/core";
+import { Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { CustomEditor } from "../helpers";
 import { useSlate } from "slate-react";
@@ -19,11 +19,12 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const markOptions = [
-  { value: `bold`, icon: <Typography variant="body2">B</Typography> },
-  { value: `italic`, icon: <Typography variant="body2">I</Typography> },
-  { value: `underline`, icon: <Typography variant="body2">U</Typography> },
-  { value: `strikethrough`, icon: <Typography variant="body2">$</Typography> },
-  { value: `code`, icon: <Typography variant="body2">{"< >"}</Typography> },
+  { value: `bold`, icon: "B" },
+  { value: `italic`, icon: "I" },
+  { value: `underline`, icon: "U" },
+  { value: `strikethrough`, icon: "S" },
+  { value: `code`, icon: "<>" },
+  { value: `pre`, icon: "<block>" },
 ];
 
 function Static() {
