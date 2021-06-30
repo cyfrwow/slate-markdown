@@ -86,12 +86,7 @@ export const slateObj = [
     type: "block-quote",
     children: [
       {
-        type: "paragraph",
-        children: [
-          {
-            text: "A block quote.",
-          },
-        ],
+        text: "A block quote.",
       },
     ],
   },
